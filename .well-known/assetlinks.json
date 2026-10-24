@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.ihyaa.albaz",
+      "sha256_cert_fingerprints": [
+        "3A:CE:FB:D5:5C:31:5C:BE:26:9A:DF:BB:9A:7C:FE:07:DD:E8:A0:BD:88:E7:F7:DC:62:6D:A5:F5:12:43:F9:0B"
+      ]
+    }
+  }
+]
