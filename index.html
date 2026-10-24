@@ -5,24 +5,101 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>منصة الأحياء - الأستاذ عبد الرحمن الباز</title>
     <style>
-        :root { color-scheme: dark; font-family: Arial, sans-serif; }
-        body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: #051f20; color: #fff; }
-        main { width: min(92vw, 520px); text-align: center; padding: 32px; border-radius: 24px; background: #102f30; }
-        h1 { margin: 0 0 8px; font-size: 22px; color: #f5bd4f; }
-        p { color: #b7c8c0; line-height: 1.7; }
-        .company { color: #f5bd4f; font-size: 13px; font-weight: 700; letter-spacing: 0.4px; }
-        .developer { margin: 0 0 12px; font-size: 12px; color: #8fb5b5; }
-        .btn { display: block; margin-top: 18px; padding: 14px 22px; border-radius: 12px; background: #f5bd4f; color: #000; text-decoration: none; font-weight: bold; }
+        :root { color-scheme: dark; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { 
+            margin: 0; 
+            min-height: 100vh; 
+            display: grid; 
+            place-items: center; 
+            background: #071618; 
+            color: #fff; 
+        }
+        main { 
+            width: min(90vw, 440px); 
+            text-align: center; 
+            padding: 36px 24px; 
+            border-radius: 28px; 
+            background: #0e2426; 
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(245, 189, 79, 0.25);
+        }
+        .avatar-container {
+            width: 95px;
+            height: 95px;
+            margin: 0 auto 18px;
+            border-radius: 50%;
+            padding: 3px;
+            background: linear-gradient(135deg, #f5bd4f, #071618);
+            box-shadow: 0 8px 20px rgba(245, 189, 79, 0.2);
+        }
+        .avatar-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            background: #132f32;
+        }
+        .company { 
+            color: #f5bd4f; 
+            font-size: 12px; 
+            font-weight: 700; 
+            letter-spacing: 1px; 
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+        h1 { 
+            margin: 0 0 8px; 
+            font-size: 22px; 
+            color: #ffffff; 
+        }
+        .developer { 
+            margin: 0 0 20px; 
+            font-size: 12px; 
+            color: #8fb5b5; 
+        }
+        #status {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 12px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #b7c8c0;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+        .btn { 
+            display: block; 
+            width: 100%;
+            box-sizing: border-box;
+            padding: 14px 20px; 
+            border-radius: 14px; 
+            background: #f5bd4f; 
+            color: #071618; 
+            text-decoration: none; 
+            font-weight: bold; 
+            font-size: 15px; 
+            box-shadow: 0 6px 20px rgba(245, 189, 79, 0.3);
+            transition: all 0.2s ease;
+        }
+        .btn:active { transform: scale(0.98); }
+        code { color: #f5bd4f; font-weight: bold; }
     </style>
 </head>
 <body>
     <main>
+        <!-- صورة الشعار أو الأستاذ -->
+        <div class="avatar-container">
+            <img src="https://yt3.googleusercontent.com/ytc/AIdro_kX... (رابط أو صورة الشعار)" alt="الأستاذ عبد الرحمن الباز" id="teacher-img" />
+        </div>
+        
         <p class="company">الفضائي تكنولوجي</p>
         <h1>الأستاذ عبد الرحمن الباز</h1>
-        <p class="developer">تم التصميم والتطوير بواسطة شركة الفضائي تكنولوجي</p>
-        <p id="status">جاري توجيهك إلى الفيديو داخل التطبيق...</p>
+        <p class="developer">تم التطوير بواسطة محمد طلعت — الفضائي تكنولوجي</p>
+        
+        <div id="status">جاري توجيهك إلى الفيديو داخل التطبيق...</div>
+        
         <a id="open" class="btn" href="#">فتح الفيديو داخل التطبيق</a>
     </main>
+
     <script>
         (function () {
             var parts = location.pathname.split('/').filter(Boolean);
@@ -32,14 +109,15 @@
 
             if (videoId) {
                 var appUrl = 'albaz://video/' + encodeURIComponent(videoId);
-                status.innerHTML = 'الفيديو رقم: <code>' + videoId + '</code>';
+                status.innerHTML = 'رقم الفيديو المطلوب: <code>' + videoId + '</code>';
                 openBtn.href = appUrl;
                 try {
                     window.location.replace(appUrl);
                 } catch (e) {}
             } else {
-                status.textContent = 'الرابط غير مكتمل';
-                openBtn.style.display = 'none';
+                status.textContent = 'منصة الأحياء - جاهز للتشغيل';
+                openBtn.textContent = 'فتح التطبيق الرئيسي';
+                openBtn.href = 'albaz://home';
             }
         })();
     </script>
