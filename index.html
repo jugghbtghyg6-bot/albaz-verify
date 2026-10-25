@@ -1,147 +1,221 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>منصة الأحياء - الأستاذ عبد الرحمن الباز</title>
-    <style>
-        :root { color-scheme: dark; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { 
-            margin: 0; 
-            min-height: 100vh; 
-            display: grid; 
-            place-items: center; 
-            background: #0d0618; /* خلفية بنفسجية داكنة تحاكي التطبيق */
-            color: #fff; 
-        }
-        main { 
-            width: min(90vw, 420px); 
-            text-align: center; 
-            padding: 40px 24px; 
-            border-radius: 32px; 
-            background: #140d24; /* بطاقة بنفسجية أفتح قليلاً وراقية */
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-            border: 1px solid rgba(168, 85, 247, 0.25); /* إطار بنفسجي خفيف أنيق */
-            position: relative;
-            overflow: hidden;
-        }
-        /* تأثير إضاءة خلفية خفيفة */
-        main::before {
-            content: '';
-            position: absolute;
-            top: -50px;
-            right: -50px;
-            width: 150px;
-            height: 150px;
-            background: rgba(168, 85, 247, 0.15);
-            border-radius: 50%;
-            filter: blur(40px);
-            z-index: 0;
-        }
-        .content-wrapper {
-            position: relative;
-            z-index: 1;
-        }
-        .avatar-container {
-            width: 110px;
-            height: 110px;
-            margin: 0 auto 20px;
-            border-radius: 50%;
-            padding: 4px;
-            background: linear-gradient(135deg, #a855f7, #f5bd4f); /* إطار متدرج بين البنفسجي والذهبي */
-            box-shadow: 0 10px 25px rgba(168, 85, 247, 0.35);
-        }
-        .avatar-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
-            background: #1a103c;
-        }
-        .company { 
-            color: #f5bd4f; 
-            font-size: 11px; 
-            font-weight: 700; 
-            letter-spacing: 1.5px; 
-            text-transform: uppercase;
-            margin-bottom: 8px;
-        }
-        h1 { 
-            margin: 0 0 6px; 
-            font-size: 24px; 
-            color: #ffffff; 
-            font-weight: 800;
-        }
-        .developer { 
-            margin: 0 0 24px; 
-            font-size: 12px; 
-            color: #c084fc; /* لون بنفسجي فاتح هادئ لحقوق التطوير */
-        }
-        #status {
-            background: rgba(168, 85, 247, 0.08);
-            padding: 14px;
-            border-radius: 16px;
-            margin-bottom: 22px;
-            font-size: 14px;
-            color: #e9d5ff;
-            border: 1px solid rgba(168, 85, 247, 0.15);
-        }
-        .btn { 
-            display: block; 
-            width: 100%;
-            box-sizing: border-box;
-            padding: 15px 20px; 
-            border-radius: 16px; 
-            background: linear-gradient(135deg, #a855f7, #9333ea); /* زر بنفسجي احترافي يتماشى مع التطبيق */
-            color: #ffffff; 
-            text-decoration: none; 
-            font-weight: bold; 
-            font-size: 16px; 
-            box-shadow: 0 8px 25px rgba(147, 51, 234, 0.4);
-            transition: all 0.2s ease;
-        }
-        .btn:active { transform: scale(0.98); }
-        code { color: #f5bd4f; font-weight: bold; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10091f">
+  <meta name="description" content="شارك فيديوهات أحياء مع الباز وافتح الدرس المطلوب بسهولة.">
+  <title>أحياء مع الباز | مشاهدة الفيديو</title>
+
+  <style>
+    * { box-sizing: border-box; }
+
+    :root {
+      color-scheme: dark;
+      font-family: Tahoma, Arial, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 22px;
+      color: #fff;
+      background:
+        radial-gradient(ellipse at 50% 0%, #482064 0%, transparent 55%),
+        linear-gradient(145deg, #10091f, #190d2d 65%, #0b0714);
+    }
+
+    .card {
+      width: 100%;
+      max-width: 460px;
+      padding: 34px 24px;
+      text-align: center;
+      border: 1px solid rgba(204, 150, 255, .24);
+      border-radius: 28px;
+      background: rgba(28, 16, 47, .91);
+      box-shadow: 0 24px 80px #0006;
+    }
+
+    .logo {
+      width: 94px;
+      height: 94px;
+      margin: 0 auto 22px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #a855f7, #f4b75e);
+      color: white;
+      font-size: 30px;
+      font-weight: 900;
+      box-shadow: 0 0 40px #a855f733;
+    }
+
+    .brand {
+      color: #f5c66b;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    h1 {
+      font-size: 29px;
+      line-height: 1.5;
+      margin: 10px 0;
+    }
+
+    .description {
+      color: #c6b6d9;
+      line-height: 1.9;
+      font-size: 15px;
+    }
+
+    .video-box {
+      margin: 24px 0;
+      padding: 17px;
+      border: 1px solid #563578;
+      border-radius: 18px;
+      background: #10091f;
+      overflow-wrap: anywhere;
+    }
+
+    .video-label {
+      display: block;
+      margin-bottom: 8px;
+      color: #bba4d5;
+      font-size: 13px;
+    }
+
+    #videoId {
+      color: #f5c66b;
+      font-weight: bold;
+      direction: ltr;
+      unicode-bidi: isolate;
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 17px 12px;
+      margin-top: 13px;
+      border: 0;
+      border-radius: 15px;
+      text-decoration: none;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .primary {
+      color: #fff;
+      background: linear-gradient(110deg, #a855f7, #7c3aed);
+      box-shadow: 0 9px 25px #9333ea33;
+    }
+
+    .secondary {
+      color: #f0dfff;
+      border: 1px solid #563578;
+      background: transparent;
+    }
+
+    .note {
+      margin-top: 21px;
+      color: #a99ab9;
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .hidden { display: none !important; }
+
+    @media (max-width: 360px) {
+      .card { padding: 26px 17px; }
+      h1 { font-size: 25px; }
+    }
+  </style>
 </head>
+
 <body>
-    <main>
-        <div class="content-wrapper">
-            <!-- صورة الأستاذ عبد الرحمن الباز -->
-            <div class="avatar-container">
-                <img src="https://yt3.googleusercontent.com/ytc/AIdro_kX2-jG8vVp03e4L6qW_s5_tZ7N8mPq1K9x_w=s160-c-k-c0x00ffffff-no-rj" alt="الأستاذ عبد الرحمن الباز" />
-            </div>
-            
-            <p class="company">الفضائي تكنولوجي</p>
-            <h1>الأستاذ عبد الرحمن الباز</h1>
-            <p class="developer">تم التطوير بواسطة محمد طلعت — الفضائي تكنولوجي</p>
-            
-            <div id="status">جاري توجيهك إلى الفيديو داخل التطبيق...</div>
-            
-            <a id="open" class="btn" href="#">فتح الفيديو داخل التطبيق</a>
-        </div>
-    </main>
+  <main class="card">
+    <div class="logo" aria-hidden="true">ب</div>
 
-    <script>
-        (function () {
-            var parts = location.pathname.split('/').filter(Boolean);
-            var videoId = parts[0] === 'video' ? decodeURIComponent(parts[1] || '') : '';
-            var status = document.getElementById('status');
-            var openBtn = document.getElementById('open');
+    <div class="brand">الفضائي تكنولوجي</div>
+    <h1>أحياء مع الباز</h1>
 
-            if (videoId) {
-                var appUrl = 'albaz://video/' + encodeURIComponent(videoId);
-                status.innerHTML = 'رقم الفيديو المطلوب: <code>' + videoId + '</code>';
-                openBtn.href = appUrl;
-                try {
-                    window.location.replace(appUrl);
-                } catch (e) {}
-            } else {
-                status.textContent = 'منصة الأحياء - جاهز للتشغيل';
-                openBtn.textContent = 'فتح التطبيق الرئيسي';
-                openBtn.href = 'albaz://home';
-            }
-        })();
-    </script>
+    <p class="description">
+      دروس الأستاذ عبد الرحمن الباز بين إيديك.
+      افتح التطبيق وانتقل إلى الفيديو المطلوب.
+    </p>
+
+    <section class="video-box">
+      <span class="video-label">رقم الفيديو المطلوب</span>
+      <span id="videoId">جارٍ قراءة الرابط...</span>
+    </section>
+
+    <a id="openApp" class="btn primary" href="#">
+      فتح الفيديو في التطبيق
+    </a>
+
+    <a id="installApp" class="btn secondary hidden"
+       href="#" target="_blank" rel="noopener">
+      تثبيت تطبيق أحياء مع الباز
+    </a>
+
+    <p class="note" id="status" aria-live="polite">
+      جاري تجهيز رابط الفيديو...
+    </p>
+  </main>
+
+  <script>
+    (() => {
+      /*
+       * عدّل رابط التثبيت إلى رابط APK الرسمي أو صفحة التطبيق
+       * في المتجر عندما يكون جاهزًا.
+       */
+      const INSTALL_URL = "https://albaz-verify.vercel.app/";
+
+      const parts = location.pathname.split("/").filter(Boolean);
+      const videoIndex = parts.indexOf("video");
+      const rawId = videoIndex >= 0 ? parts[videoIndex + 1] : "";
+      const videoId = rawId ? decodeURIComponent(rawId) : "";
+
+      const idElement = document.getElementById("videoId");
+      const openButton = document.getElementById("openApp");
+      const installButton = document.getElementById("installApp");
+      const status = document.getElementById("status");
+
+      installButton.href = INSTALL_URL;
+
+      if (!videoId) {
+        idElement.textContent = "لم يتم تحديد فيديو";
+        status.textContent = "افتح رابط مشاركة صحيح يحتوي على رقم الفيديو.";
+        openButton.classList.add("hidden");
+        installButton.classList.remove("hidden");
+        return;
+      }
+
+      idElement.textContent = videoId;
+
+      /*
+       * رابط HTTPS هو الرابط الأساسي.
+       * إذا كانت روابط Android App Links مضبوطة في التطبيق
+       * ومثبتة وموثّقة، يمكن للنظام فتح التطبيق مباشرة.
+       */
+      const videoUrl = new URL(
+        "/video/" + encodeURIComponent(videoId),
+        location.origin
+      );
+
+      openButton.href = videoUrl.href;
+      installButton.classList.remove("hidden");
+
+      status.textContent =
+        "إذا كان التطبيق مثبتًا ومدعومًا لهذا الرابط، سيفتح الفيديو فيه. وإلا ستظل هذه الصفحة متاحة.";
+
+      openButton.addEventListener("click", () => {
+        status.textContent = "جارٍ فتح رابط الفيديو...";
+      });
+    })();
+  </script>
 </body>
 </html>
