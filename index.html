@@ -2,220 +2,409 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#10091f">
-  <meta name="description" content="شارك فيديوهات أحياء مع الباز وافتح الدرس المطلوب بسهولة.">
-  <title>أحياء مع الباز | مشاهدة الفيديو</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#070a25">
+<title>أحياء مع الباز | الفضائي تكنولوجي</title>
 
-  <style>
-    * { box-sizing: border-box; }
+<style>
+*{box-sizing:border-box}
 
-    :root {
-      color-scheme: dark;
-      font-family: Tahoma, Arial, sans-serif;
-    }
+:root{
+  --purple:#923cff;
+  --gold:#ffc94f;
+  --text:#f8f7ff;
+  --muted:#b9c4ff;
+}
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      padding: 22px;
-      color: #fff;
-      background:
-        radial-gradient(ellipse at 50% 0%, #482064 0%, transparent 55%),
-        linear-gradient(145deg, #10091f, #190d2d 65%, #0b0714);
-    }
+body{
+  margin:0;
+  min-height:100vh;
+  color:var(--text);
+  font-family:Tahoma,Arial,sans-serif;
+  background:
+    radial-gradient(ellipse at 50% 15%,#32145d 0%,transparent 45%),
+    linear-gradient(145deg,#0b0b35,#05091f 60%,#020517);
+}
 
-    .card {
-      width: 100%;
-      max-width: 460px;
-      padding: 34px 24px;
-      text-align: center;
-      border: 1px solid rgba(204, 150, 255, .24);
-      border-radius: 28px;
-      background: rgba(28, 16, 47, .91);
-      box-shadow: 0 24px 80px #0006;
-    }
+.page{
+  width:min(100%,850px);
+  margin:auto;
+  padding:24px 18px 30px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
 
-    .logo {
-      width: 94px;
-      height: 94px;
-      margin: 0 auto 22px;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #a855f7, #f4b75e);
-      color: white;
-      font-size: 30px;
-      font-weight: 900;
-      box-shadow: 0 0 40px #a855f733;
-    }
+.topbar{
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-bottom:38px;
+}
 
-    .brand {
-      color: #f5c66b;
-      font-size: 14px;
-      font-weight: bold;
-    }
+.brand{
+  color:#d9d8ff;
+  font-weight:bold;
+  font-size:15px;
+}
 
-    h1 {
-      font-size: 29px;
-      line-height: 1.5;
-      margin: 10px 0;
-    }
+.official{
+  color:#c8c4ff;
+  background:#21174c;
+  border:1px solid #44317e;
+  border-radius:30px;
+  padding:10px 14px;
+  font-size:11px;
+  line-height:1.7;
+}
 
-    .description {
-      color: #c6b6d9;
-      line-height: 1.9;
-      font-size: 15px;
-    }
+.logo{
+  width:150px;
+  height:150px;
+  border-radius:34px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(#05091e,#05091e) padding-box,
+    linear-gradient(140deg,#ef63ff,#7023e9) border-box;
+  border:3px solid transparent;
+  box-shadow:0 0 35px #a338ff55;
+  margin-bottom:24px;
+}
 
-    .video-box {
-      margin: 24px 0;
-      padding: 17px;
-      border: 1px solid #563578;
-      border-radius: 18px;
-      background: #10091f;
-      overflow-wrap: anywhere;
-    }
+.book{font-size:38px}
+.logo-main{font-size:38px;font-weight:900}
+.logo-sub{color:var(--gold);font-size:24px;font-weight:900}
 
-    .video-label {
-      display: block;
-      margin-bottom: 8px;
-      color: #bba4d5;
-      font-size: 13px;
-    }
+h1{
+  font-size:clamp(34px,7vw,52px);
+  margin:0;
+  text-align:center;
+}
 
-    #videoId {
-      color: #f5c66b;
-      font-weight: bold;
-      direction: ltr;
-      unicode-bidi: isolate;
-    }
+.brush{
+  width:75%;
+  height:7px;
+  margin:8px 0 18px;
+  background:linear-gradient(90deg,transparent,#7130ff,#bd43ff,#7130ff,transparent);
+  border-radius:50%;
+  transform:rotate(-2deg);
+}
 
-    .btn {
-      display: block;
-      width: 100%;
-      padding: 17px 12px;
-      margin-top: 13px;
-      border: 0;
-      border-radius: 15px;
-      text-decoration: none;
-      font-size: 17px;
-      font-weight: bold;
-      cursor: pointer;
-    }
+.intro{
+  text-align:center;
+  font-size:clamp(16px,3vw,22px);
+  line-height:1.9;
+  margin:0 0 28px;
+}
 
-    .primary {
-      color: #fff;
-      background: linear-gradient(110deg, #a855f7, #7c3aed);
-      box-shadow: 0 9px 25px #9333ea33;
-    }
+.intro span{color:var(--muted)}
 
-    .secondary {
-      color: #f0dfff;
-      border: 1px solid #563578;
-      background: transparent;
-    }
+.video-card{
+  width:100%;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  align-items:center;
+  gap:20px;
+  padding:20px;
+  border:2px solid #343581;
+  border-radius:25px;
+  background:#0b1238cc;
+}
 
-    .note {
-      margin-top: 21px;
-      color: #a99ab9;
-      font-size: 12px;
-      line-height: 1.8;
-    }
+.thumbnail{
+  min-height:155px;
+  display:grid;
+  place-items:center;
+  border-radius:18px;
+  background:
+    radial-gradient(circle,#4930a8,#161759 60%,#090d32);
+  border:1px solid #5635a0;
+}
 
-    .hidden { display: none !important; }
+.play{
+  width:60px;
+  height:60px;
+  border:2px solid white;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  font-size:27px;
+}
 
-    @media (max-width: 360px) {
-      .card { padding: 26px 17px; }
-      h1 { font-size: 25px; }
-    }
-  </style>
+.label{font-size:15px;margin-bottom:15px}
+
+.video-id{
+  direction:ltr;
+  overflow-wrap:anywhere;
+  text-align:center;
+  background:#191052;
+  border:1px solid #43258b;
+  border-radius:14px;
+  padding:14px 8px;
+  font-size:22px;
+  font-weight:bold;
+}
+
+.video-sub{
+  color:var(--muted);
+  text-align:center;
+  margin-top:12px;
+  font-size:13px;
+}
+
+.actions{
+  width:100%;
+  display:grid;
+  gap:15px;
+  margin-top:25px;
+}
+
+.btn{
+  min-height:95px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:16px;
+  border-radius:24px;
+  color:white;
+  text-decoration:none;
+  text-align:center;
+  font-family:inherit;
+  transition:transform .15s;
+}
+
+.btn:active{transform:scale(.98)}
+
+.primary{
+  background:linear-gradient(110deg,#a344ff,#7928ed,#6024df);
+  border:2px solid #d08cff;
+  box-shadow:0 8px 30px #842bff55;
+}
+
+.secondary{
+  background:#090e2d;
+  border:2px solid #5433b8;
+}
+
+.symbol{font-size:27px;min-width:30px}
+
+.btn-copy{flex:1}
+
+.btn-title{
+  display:block;
+  font-size:clamp(17px,3.5vw,25px);
+  font-weight:900;
+  line-height:1.6;
+}
+
+.btn-hint{
+  display:block;
+  font-size:12px;
+  color:#e0d1ff;
+  line-height:1.8;
+}
+
+.status{
+  color:#b9c4ff;
+  text-align:center;
+  font-size:12px;
+  line-height:1.8;
+}
+
+.features{
+  width:100%;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  margin:35px 0;
+}
+
+.feature{
+  text-align:center;
+  padding:8px;
+  color:#d8dcff;
+  font-size:13px;
+  line-height:1.9;
+  border-left:1px solid #343581;
+}
+
+.feature:last-child{border-left:0}
+.feature-icon{display:block;color:#a05cff;font-size:27px}
+.feature span:last-child{color:#9faeff}
+
+footer{
+  text-align:center;
+  line-height:2;
+  color:#dedaff;
+  font-size:19px;
+  margin-top:10px;
+}
+
+footer small{
+  display:block;
+  color:#bd43ff;
+  font-weight:bold;
+  font-size:14px;
+}
+
+@media(max-width:550px){
+  .page{padding:18px 15px 25px}
+  .topbar{margin-bottom:28px}
+  .logo{width:132px;height:132px}
+  .logo-main{font-size:34px}
+  .video-card{grid-template-columns:1fr;padding:16px}
+  .thumbnail{min-height:140px;grid-row:2}
+  .video-info{grid-row:1}
+  .btn{min-height:85px;padding:12px}
+  .features{margin:28px 0}
+  .feature{font-size:11px;padding:5px}
+}
+
+@media(max-width:350px){
+  .features{grid-template-columns:repeat(2,1fr);gap:15px}
+  .feature:nth-child(2){border-left:0}
+}
+</style>
 </head>
 
 <body>
-  <main class="card">
-    <div class="logo" aria-hidden="true">ب</div>
+<main class="page">
 
-    <div class="brand">الفضائي تكنولوجي</div>
+  <header class="topbar">
+    <div class="brand">🪐 الفضائي تكنولوجي</div>
+    <div class="official">
+      ⬟ منصة رسمية<br>
+      للأستاذ عبد الرحمن الباز
+    </div>
+  </header>
+
+  <section style="width:100%;display:flex;flex-direction:column;align-items:center">
+    <div class="logo">
+      <div class="book">📖</div>
+      <div class="logo-main">أحياء</div>
+      <div class="logo-sub">مع الباز</div>
+    </div>
+
     <h1>أحياء مع الباز</h1>
+    <div class="brush"></div>
 
-    <p class="description">
-      دروس الأستاذ عبد الرحمن الباز بين إيديك.
-      افتح التطبيق وانتقل إلى الفيديو المطلوب.
+    <p class="intro">
+      دروس الأستاذ عبد الرحمن الباز بين إيديك<br>
+      <span>افتح التطبيق وانتقل إلى الفيديو المطلوب بسهولة</span>
     </p>
+  </section>
 
-    <section class="video-box">
-      <span class="video-label">رقم الفيديو المطلوب</span>
-      <span id="videoId">جارٍ قراءة الرابط...</span>
-    </section>
+  <section class="video-card">
+    <div class="thumbnail">
+      <div class="play">▶</div>
+    </div>
 
-    <a id="openApp" class="btn primary" href="#">
-      فتح الفيديو في التطبيق
+    <div class="video-info">
+      <div class="label">▣ رقم الفيديو المطلوب</div>
+      <div class="video-id" id="videoId">جارٍ قراءة الرابط...</div>
+      <div class="video-sub">أحياء - الصف الثالث الثانوي</div>
+    </div>
+  </section>
+
+  <section class="actions">
+    <a class="btn primary" id="openApp" href="#">
+      <span class="symbol">➜</span>
+      <span class="btn-copy">
+        <span class="btn-title">فتح الفيديو داخل التطبيق</span>
+        <span class="btn-hint">الانتقال مباشرة إلى الفيديو المطلوب</span>
+      </span>
+      <span class="symbol">🚀</span>
     </a>
 
-    <a id="installApp" class="btn secondary hidden"
-       href="#" target="_blank" rel="noopener">
-      تثبيت تطبيق أحياء مع الباز
+    <a class="btn secondary" id="installApp"
+       href="https://albaz-verify.vercel.app/">
+      <span class="symbol">➜</span>
+      <span class="btn-copy">
+        <span class="btn-title">تثبيت التطبيق</span>
+        <span class="btn-hint">إذا لم يكن التطبيق مثبتًا على جهازك</span>
+      </span>
+      <span class="symbol">⇩</span>
     </a>
+  </section>
 
-    <p class="note" id="status" aria-live="polite">
-      جاري تجهيز رابط الفيديو...
-    </p>
-  </main>
+  <p class="status" id="status" aria-live="polite"></p>
 
-  <script>
-    (() => {
-      /*
-       * عدّل رابط التثبيت إلى رابط APK الرسمي أو صفحة التطبيق
-       * في المتجر عندما يكون جاهزًا.
-       */
-      const INSTALL_URL = "https://albaz-verify.vercel.app/";
+  <section class="features">
+    <div class="feature">
+      <span class="feature-icon">ϟ</span>
+      سهولة<br><span>في الوصول</span>
+    </div>
+    <div class="feature">
+      <span class="feature-icon">⬡</span>
+      محتوى تعليمي<br><span>موثوق</span>
+    </div>
+    <div class="feature">
+      <span class="feature-icon">▷</span>
+      جودة عالية<br><span>للفيديوهات</span>
+    </div>
+    <div class="feature">
+      <span class="feature-icon">♧</span>
+      شرح مبسط<br><span>ومفهوم</span>
+    </div>
+  </section>
 
-      const parts = location.pathname.split("/").filter(Boolean);
-      const videoIndex = parts.indexOf("video");
-      const rawId = videoIndex >= 0 ? parts[videoIndex + 1] : "";
-      const videoId = rawId ? decodeURIComponent(rawId) : "";
+  <footer>
+    ——— أحياء مع الباز ———
+    <small>الفضائي تكنولوجي</small>
+  </footer>
 
-      const idElement = document.getElementById("videoId");
-      const openButton = document.getElementById("openApp");
-      const installButton = document.getElementById("installApp");
-      const status = document.getElementById("status");
+</main>
 
-      installButton.href = INSTALL_URL;
+<script>
+(() => {
+  const INSTALL_URL = "https://albaz-verify.vercel.app/";
 
-      if (!videoId) {
-        idElement.textContent = "لم يتم تحديد فيديو";
-        status.textContent = "افتح رابط مشاركة صحيح يحتوي على رقم الفيديو.";
-        openButton.classList.add("hidden");
-        installButton.classList.remove("hidden");
-        return;
-      }
+  const parts = location.pathname.split("/").filter(Boolean);
+  const index = parts.indexOf("video");
+  let videoId = "";
 
-      idElement.textContent = videoId;
+  if (index !== -1 && parts[index + 1]) {
+    try {
+      videoId = decodeURIComponent(parts[index + 1]);
+    } catch (e) {
+      videoId = parts[index + 1];
+    }
+  }
 
-      /*
-       * رابط HTTPS هو الرابط الأساسي.
-       * إذا كانت روابط Android App Links مضبوطة في التطبيق
-       * ومثبتة وموثّقة، يمكن للنظام فتح التطبيق مباشرة.
-       */
-      const videoUrl = new URL(
-        "/video/" + encodeURIComponent(videoId),
-        location.origin
-      );
+  const idElement = document.getElementById("videoId");
+  const openButton = document.getElementById("openApp");
+  const installButton = document.getElementById("installApp");
+  const status = document.getElementById("status");
 
-      openButton.href = videoUrl.href;
-      installButton.classList.remove("hidden");
+  installButton.href = INSTALL_URL;
 
-      status.textContent =
-        "إذا كان التطبيق مثبتًا ومدعومًا لهذا الرابط، سيفتح الفيديو فيه. وإلا ستظل هذه الصفحة متاحة.";
+  if (!videoId) {
+    idElement.textContent = "لا يوجد رقم فيديو";
+    status.textContent =
+      "افتح رابط مشاركة صحيح يحتوي على /video/ ثم رقم الفيديو.";
+    openButton.style.opacity = ".5";
+    openButton.addEventListener("click", e => e.preventDefault());
+    return;
+  }
 
-      openButton.addEventListener("click", () => {
-        status.textContent = "جارٍ فتح رابط الفيديو...";
-      });
-    })();
-  </script>
+  idElement.textContent = videoId;
+
+  const videoUrl = new URL(
+    "/video/" + encodeURIComponent(videoId),
+    location.origin
+  );
+
+  openButton.href = videoUrl.href;
+
+  status.textContent =
+    "إذا لم يفتح التطبيق، يلزم التأكد من إعداد روابط Android App Links داخل التطبيق.";
+})();
+</script>
+
 </body>
 </html>
