@@ -322,7 +322,7 @@ footer small{
     </a>
 
     <a class="btn secondary" id="installApp"
-       href="https://albaz-verify.vercel.app/">
+       href="https://expo.dev/artifacts/eas/8HrTg_k1d5vVluhGqcSIwMJ5XNrOKgi0ixZFWt4Zq-4.apk">
       <span class="symbol">➜</span>
       <span class="btn-copy">
         <span class="btn-title">تثبيت التطبيق</span>
@@ -362,19 +362,29 @@ footer small{
 
 <script>
 (() => {
-  const INSTALL_URL = "https://albaz-verify.vercel.app/";
-
+  const INSTALL_URL = "https://expo.dev/artifacts/eas/8HrTg_k1d5vVluhGqcSIwMJ5XNrOKgi0ixZFWt4Zq-4.apk";
+  const PACKAGE_NAME = "com.ihyaa.albaz";
+  const APP_SCHEME = "albaz";
+  const VIDEO_ID_PATTERN = /^[A-Za-z0-9_-]{11}$/;
+  const CHANNEL_ID_PATTERN = /^[A-Za-z0-9_-]{8,64}$/;
   const parts = location.pathname.split("/").filter(Boolean);
-  const index = parts.indexOf("video");
+  const isVideoRoute = parts.length === 2 && parts[0].toLowerCase() === "video";
   let videoId = "";
 
-  if (index !== -1 && parts[index + 1]) {
+  if (isVideoRoute && parts[1]) {
     try {
-      videoId = decodeURIComponent(parts[index + 1]);
-    } catch (e) {
-      videoId = parts[index + 1];
+      videoId = decodeURIComponent(parts[1]);
+    } catch {
+      videoId = parts[1];
     }
   }
+
+  const pageParams = new URLSearchParams(location.search || "");
+  const requestedKind = pageParams.get("type");
+  const channelId = pageParams.get("channelId") || "";
+  const validKind = requestedKind === null || requestedKind === "video" || requestedKind === "reel";
+  const validChannel = !channelId || CHANNEL_ID_PATTERN.test(channelId);
+  const validLink = isVideoRoute && VIDEO_ID_PATTERN.test(videoId) && validKind && validChannel;
 
   const idElement = document.getElementById("videoId");
   const openButton = document.getElementById("openApp");
@@ -383,26 +393,47 @@ footer small{
 
   installButton.href = INSTALL_URL;
 
-  if (!videoId) {
-    idElement.textContent = "لا يوجد رقم فيديو";
-    status.textContent =
-      "افتح رابط مشاركة صحيح يحتوي على /video/ ثم رقم الفيديو.";
+  if (!validLink) {
+    idElement.textContent = videoId || "معرّف غير صالح";
+    status.style.color = "#ffc2c2";
+    status.textContent = "رابط الفيديو غير صحيح. تأكد أن الرابط يحتوي على /video/ ومعرّف YouTube صالح.";
     openButton.style.opacity = ".5";
-    openButton.addEventListener("click", e => e.preventDefault());
+    openButton.addEventListener("click", event => event.preventDefault());
     return;
   }
 
   idElement.textContent = videoId;
+  const isReel = requestedKind === "reel";
+  const appParams = new URLSearchParams();
+  if (isReel) appParams.set("type", "reel");
+  if (isReel && channelId) appParams.set("channelId", channelId);
+  const appQuery = appParams.toString();
 
-  const videoUrl = new URL(
-    "/video/" + encodeURIComponent(videoId),
-    location.origin
-  );
+  const fallbackUrl = new URL(`/video/${encodeURIComponent(videoId)}`, location.origin);
+  if (isReel) fallbackUrl.searchParams.set("type", "reel");
+  if (isReel && channelId) fallbackUrl.searchParams.set("channelId", channelId);
+  fallbackUrl.searchParams.set("app_open_failed", "1");
+  const intentTarget = `video/${encodeURIComponent(videoId)}${appQuery ? `?${appQuery}` : ""}`;
+  openButton.href = `intent://${intentTarget}#Intent;scheme=${APP_SCHEME};package=${PACKAGE_NAME};S.browser_fallback_url=${encodeURIComponent(fallbackUrl.href)};end`;
 
-  openButton.href = videoUrl.href;
+  if (pageParams.get("app_open_failed") === "1") {
+    status.style.color = "#ffc2c2";
+    status.textContent = "لم يفتح التطبيق. تأكد من تثبيت النسخة وتفعيل فتح الروابط المدعومة، أو نزّل التطبيق من الزر أدناه.";
+  } else {
+    status.textContent = isReel
+      ? "هذا رابط Reel. اضغط لفتحه في مشغل Reels؛ وإذا تعذر فتح التطبيق فستبقى صفحة الفيديو متاحة."
+      : "اضغط لفتح الفيديو في التطبيق. إذا لم ينتقل المتصفح، استخدم رابط التثبيت أو فعّل فتح الروابط المدعومة.";
+  }
 
-  status.textContent =
-    "إذا لم يفتح التطبيق، يلزم التأكد من إعداد روابط Android App Links داخل التطبيق.";
+  openButton.addEventListener("click", () => {
+    status.textContent = "جارٍ طلب فتح التطبيق. إذا بقيت هذه الصفحة ظاهرة، نزّل التطبيق أو فعّل فتح الروابط المدعومة.";
+    window.setTimeout(() => {
+      if (document.visibilityState === "visible" && pageParams.get("app_open_failed") !== "1") {
+        status.style.color = "#ffc2c2";
+        status.textContent = "لم ينتقل المتصفح إلى التطبيق. تأكد من تثبيت النسخة الجديدة وتفعيل فتح الروابط المدعومة.";
+      }
+    }, 2200);
+  });
 })();
 </script>
 
